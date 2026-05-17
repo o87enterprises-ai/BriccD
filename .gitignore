@@ -2,10 +2,11 @@
 node_modules
 .DS_Store
 
-# Build output
-dist
-dist-ssr
-*.local
+# Environment
+.env
+.env.*
+!.env.example
+
 
 # IDE
 .vscode

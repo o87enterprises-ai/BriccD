@@ -1,0 +1,200 @@
+:root {
+  --primary: #ffcf00;
+  --primary-hover: #e6bb00;
+  --danger: #ff4444;
+  --secondary: #4a90e2;
+  --bg: #f0f0f0;
+  --card-bg: #ffffff;
+  --text: #333;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+}
+
+canvas {
+  display: block;
+}
+
+/* Auth Overlay */
+#auth-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.auth-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.auth-methods input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-group button {
+  flex: 1;
+}
+
+/* Toolbox */
+#toolbox {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  width: 180px;
+  max-height: 90vh;
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+}
+
+#toolbox button {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#toolbox button:hover {
+  background: var(--primary-hover);
+}
+
+#toolbox button.secondary {
+  background: var(--secondary);
+  color: white;
+}
+
+#toolbox button.danger {
+  background: var(--danger);
+  color: white;
+}
+
+/* Profile UI */
+#profile-ui {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 900;
+}
+
+.profile-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 15px;
+  width: 400px;
+  position: relative;
+}
+
+#close-profile {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.avatar-controls {
+  margin: 20px 0;
+}
+
+.control-group {
+  margin-bottom: 15px;
+}
+
+.control-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.control-group input[type="color"] {
+  width: 100%;
+  height: 30px;
+  border: none;
+  padding: 0;
+}
+
+.control-group select {
+  width: 100%;
+  padding: 8px;
+}
+
+#avatar-preview {
+  height: 150px;
+  background: #eee;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pieces List */
+#piece-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+#piece-list button {
+  font-size: 12px;
+  padding: 8px 4px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 15px 0;
+}
+
+button.secondary { background: var(--secondary); color: white; }
+button.danger { background: var(--danger); color: white; }
+
+#vr-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}

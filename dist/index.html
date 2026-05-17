@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bricc'd - Lego Studio</title>
+    <script type="module" crossorigin src="/assets/index-XoMeiSrS.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-6aCXfhwB.css">
+  <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
+  <body>
+    <div id="auth-overlay">
+      <div class="auth-card">
+        <h1>Bricc'd</h1>
+        <p>Login to start building</p>
+        <input type="text" placeholder="Username (demo)" id="username" />
+        <input type="password" placeholder="Password (demo)" id="password" />
+        <button id="login-btn">Login</button>
+      </div>
+    </div>
+
+    <div id="profile-ui" class="hidden">
+      <div class="profile-card">
+        <button id="close-profile">×</button>
+        <h2>Your Profile</h2>
+        <div id="avatar-preview"></div>
+        <div class="avatar-controls">
+          <label>Head Color <input type="color" id="head-color" value="#ffff00"></label>
+          <label>Torso Color <input type="color" id="torso-color" value="#ff0000"></label>
+          <label>Legs Color <input type="color" id="legs-color" value="#0000ff"></label>
+        </div>
+        <button id="save-avatar">Save Avatar</button>
+      </div>
+    </div>
+
+    <div id="toolbox" class="hidden">
+      <button id="open-profile">👤 Profile</button>
+      <hr/>
+      <h3>Pieces</h3>
+      <div id="piece-list"></div>
+      <hr/>
+      <h3>Tools</h3>
+      <button id="align-view">Align View</button>
+      <button id="erase-mode">Eraser</button>
+      <button id="lift-piece">Lift</button>
+      <button id="drop-piece">Drop</button>
+    </div>
+
+    <canvas id="app"></canvas>
+  </body>
+</html>
