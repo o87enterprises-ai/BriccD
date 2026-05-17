@@ -198,3 +198,64 @@ button.danger { background: var(--danger); color: white; }
   transform: translateX(-50%);
   z-index: 1000;
 }
+
+/* Movement Controls */
+#movement-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 800;
+}
+
+.d-pad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.middle-row {
+  display: flex;
+  gap: 5px;
+}
+
+#movement-controls button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  background: var(--secondary);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s, background 0.2s;
+}
+
+#movement-controls button:active {
+  transform: scale(0.9);
+  background: #357abd;
+}
+
+.vertical-controls {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.vertical-controls button {
+  background: var(--primary) !important;
+  color: var(--text) !important;
+}

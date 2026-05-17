@@ -2,7 +2,7 @@ import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
-import { createPiece, BRICK_H } from './builder/pieces.js';
+import { createPiece, BRICK_H, BRICK_W } from './builder/pieces.js';
 import { setupToolbox } from './builder/toolbox.js';
 import { setupControls } from './builder/controls.js';
 import { setupEraser } from './builder/eraser.js';
@@ -22,6 +22,7 @@ const logoutBtn = document.getElementById('logout-btn');
 
 const toolbox = document.getElementById('toolbox');
 const profileUI = document.getElementById('profile-ui');
+const movementControls = document.getElementById('movement-controls');
 
 let isAppStarted = false;
 let landingScene = initLandingScene();
@@ -145,6 +146,7 @@ function init() {
     scene.add(piece);
     builderControls.addDraggable(piece);
     selectedPiece = piece;
+    movementControls.classList.remove('hidden');
   });
 
   // Persistence Logic
@@ -176,6 +178,27 @@ function init() {
     }
   });
 
+  // Directional Movement Logic
+  const movePiece = (dx, dy, dz) => {
+    if (selectedPiece) {
+      selectedPiece.position.x += dx * BRICK_W;
+      selectedPiece.position.y += dy * BRICK_H;
+      selectedPiece.position.z += dz * BRICK_W;
+      // Snap to grid
+      selectedPiece.position.x = Math.round(selectedPiece.position.x / BRICK_W) * BRICK_W;
+      selectedPiece.position.z = Math.round(selectedPiece.position.z / BRICK_W) * BRICK_W;
+      const h = selectedPiece.userData.height || BRICK_H;
+      selectedPiece.position.y = Math.max(h/2, Math.round((selectedPiece.position.y - h/2) / BRICK_H) * BRICK_H + h/2);
+    }
+  };
+
+  document.getElementById('move-fwd').addEventListener('click', () => movePiece(0, 0, -1));
+  document.getElementById('move-back').addEventListener('click', () => movePiece(0, 0, 1));
+  document.getElementById('move-left').addEventListener('click', () => movePiece(-1, 0, 0));
+  document.getElementById('move-right').addEventListener('click', () => movePiece(1, 0, 0));
+  document.getElementById('move-up').addEventListener('click', () => movePiece(0, 1, 0));
+  document.getElementById('move-down').addEventListener('click', () => movePiece(0, -1, 0));
+
   // Selection Logic for Lift/Drop & Duplication
   window.addEventListener('mousedown', (event) => {
     const raycaster = new THREE.Raycaster();
@@ -196,8 +219,10 @@ function init() {
         scene.add(clone);
         builderControls.addDraggable(clone);
         selectedPiece = clone;
+        movementControls.classList.remove('hidden');
       } else {
         selectedPiece = obj;
+        movementControls.classList.remove('hidden');
       }
     }
   });
