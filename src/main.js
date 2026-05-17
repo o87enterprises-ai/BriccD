@@ -27,47 +27,6 @@ startBtn.addEventListener('click', () => {
   startApp();
 });
 
-// UI Toggle Logic
-document.getElementById('hide-ui').addEventListener('click', () => {
-  toolbox.classList.add('hidden');
-  movementControls.classList.add('hidden');
-  unhideUIBtn.classList.remove('hidden');
-});
-
-unhideUIBtn.addEventListener('click', () => {
-  toolbox.classList.remove('hidden');
-  if (selectedPiece) movementControls.classList.remove('hidden');
-  unhideUIBtn.classList.add('hidden');
-});
-
-// Full Screen Logic
-const toggleFullScreen = () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch(err => {
-      console.error(`Error attempting to enable full-screen mode: ${err.message}`);
-    });
-  } else {
-    document.exitFullscreen();
-  }
-};
-
-document.getElementById('toggle-fullscreen').addEventListener('click', toggleFullScreen);
-
-// Escape key to exit fullscreen and unhide UI
-window.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    }
-    // Also unhide UI if hidden
-    if (toolbox.classList.contains('hidden')) {
-      toolbox.classList.remove('hidden');
-      if (selectedPiece) movementControls.classList.remove('hidden');
-      unhideUIBtn.classList.add('hidden');
-    }
-  }
-});
-
 function startApp() {
   if (isAppStarted) return;
   landingScene.stop();
@@ -128,6 +87,49 @@ function init() {
   const eraser = setupEraser(camera, scene, builderControls.getDraggables, builderControls.removeDraggable);
   setupAlignView(camera, orbitControls);
 
+  let selectedPiece = null;
+
+  // UI Toggle Logic
+  document.getElementById('hide-ui').addEventListener('click', () => {
+    toolbox.classList.add('hidden');
+    movementControls.classList.add('hidden');
+    unhideUIBtn.classList.remove('hidden');
+  });
+
+  unhideUIBtn.addEventListener('click', () => {
+    toolbox.classList.remove('hidden');
+    if (selectedPiece) movementControls.classList.remove('hidden');
+    unhideUIBtn.classList.add('hidden');
+  });
+
+  // Full Screen Logic
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(err => {
+        console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
+  document.getElementById('toggle-fullscreen').addEventListener('click', toggleFullScreen);
+
+  // Escape key to exit fullscreen and unhide UI
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
+      // Also unhide UI if hidden
+      if (toolbox.classList.contains('hidden')) {
+        toolbox.classList.remove('hidden');
+        if (selectedPiece) movementControls.classList.remove('hidden');
+        unhideUIBtn.classList.add('hidden');
+      }
+    }
+  });
+
   let currentAvatar = assembleAvatar(scene);
   currentAvatar.position.set(-5, 1.2, -5); // Set y to half of avatar height (2.4/2)
   scene.add(currentAvatar);
@@ -152,15 +154,15 @@ function init() {
     profileUI.classList.add('hidden');
   });
 
-  let selectedPiece = null;
-
   const toolboxState = setupToolbox(scene, (pieceType) => {
     const piece = createPiece(pieceType);
     piece.position.set(0, piece.userData.height / 2, 0);
     scene.add(piece);
     builderControls.addDraggable(piece);
     selectedPiece = piece;
-    movementControls.classList.remove('hidden');
+    if (!toolbox.classList.contains('hidden')) {
+      movementControls.classList.remove('hidden');
+    }
   });
 
   // Persistence Logic
@@ -233,10 +235,14 @@ function init() {
         scene.add(clone);
         builderControls.addDraggable(clone);
         selectedPiece = clone;
-        movementControls.classList.remove('hidden');
+        if (!toolbox.classList.contains('hidden')) {
+          movementControls.classList.remove('hidden');
+        }
       } else {
         selectedPiece = obj;
-        movementControls.classList.remove('hidden');
+        if (!toolbox.classList.contains('hidden')) {
+          movementControls.classList.remove('hidden');
+        }
       }
     }
   });
