@@ -1,14 +1,10 @@
 # Bricc'd - The Ultimate Lego Studio Prototype
 
-Bricc'd is a high-performance, web-based 3D brick building application. Built with **Vanilla JS**, **Three.js**, and **Vite**, it offers a seamless creative experience from desktop to VR.
+Bricc'd is a high-performance, web-based 3D brick building application. Built with **Vanilla JS**, **Three.js**, and **Vite**, it offers a seamless, private creative experience from desktop to VR.
 
 ## 🚀 Quickstart Guide
 
-### 1. Prerequisites
-- [Node.js](https://nodejs.org/) (v18+)
-- A [Supabase](https://supabase.com/) project (for Auth/Cloud Storage)
-
-### 2. Setup
+### 1. Setup
 ```bash
 # Clone the repository
 git clone https://github.com/your-repo/briccd.git
@@ -16,18 +12,14 @@ cd briccd
 
 # Install dependencies
 npm install
-
-# Setup Environment Variables
-# Copy .env.example to .env and fill in your Supabase credentials
-cp .env.example .env
 ```
 
-### 3. Local Development
+### 2. Local Development
 ```bash
 npm run dev
 ```
 
-### 4. Build for Production
+### 3. Build for Production
 ```bash
 npm run build
 ```
@@ -37,22 +29,21 @@ npm run build
 ## 🛠 Features
 
 - **3D Brick Engine**: Real-time grid snapping, lifting, and dropping of various brick types.
-- **Advanced Persistence**:
-  - **Local Save**: Save your creations directly to your browser's `localStorage`.
-  - **Cloud Sync**: (Coming Soon) Sync your projects across devices via Supabase.
+- **Local Persistence**: Save your creations directly to your browser's `localStorage`. No account or internet connection required.
 - **Custom LEGO Avatar**: Personalize your builder with custom colors and face types (Classic, Cool, Surprised, Wink).
 - **Meta AR/VR Ready**: Full **WebXR** support. Click the "Enter VR" button on compatible devices (Quest 2/3/Pro) to build in immersive 3D.
 - **Shortcuts**: 
   - `Ctrl/Cmd + Click`: Duplicate the selected piece.
   - `Rotate Button`: Rotate pieces on the horizontal plane.
+  - `D-Pad`: Touchscreen-friendly directional movement controls.
 
 ---
 
-## 🔐 Security & Hardening
+## 🔐 Privacy & Security
 
-- **Environment Protection**: Sensitive API keys are managed via Vite's `.env` system and are never committed to version control.
+- **100% Local**: Your designs never leave your device. Bricc'd uses browser storage for all data.
+- **No Tracking**: No cookies, no trackers, no analytics.
 - **Sanitized Repository**: All development artifacts and temporary files are excluded via `.gitignore`.
-- **Auth Flow**: Secure Google and Email/Password authentication powered by Supabase Auth (GoTrue).
 
 ---
 

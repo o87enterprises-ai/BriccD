@@ -10,16 +10,11 @@ import { setupAlignView } from './builder/align.js';
 
 import { initLandingScene } from './landing/scene.js';
 import { assembleAvatar } from './auth/avatar.js';
-import { signInWithGoogle, signInWithEmail, signUpWithEmail, signOut, getSession } from './auth/supabase.js';
 import { saveToLocal, loadFromLocal } from './builder/persistence.js';
 
 // UI Elements
-const authOverlay = document.getElementById('auth-overlay');
-const loginBtn = document.getElementById('login-btn');
-const signupBtn = document.getElementById('signup-btn');
-const googleLoginBtn = document.getElementById('google-login-btn');
-const logoutBtn = document.getElementById('logout-btn');
-
+const landingOverlay = document.getElementById('landing-overlay');
+const startBtn = document.getElementById('start-btn');
 const toolbox = document.getElementById('toolbox');
 const profileUI = document.getElementById('profile-ui');
 const movementControls = document.getElementById('movement-controls');
@@ -27,43 +22,14 @@ const movementControls = document.getElementById('movement-controls');
 let isAppStarted = false;
 let landingScene = initLandingScene();
 
-// Auth Handlers
-loginBtn.addEventListener('click', async () => {
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  const { error } = await signInWithEmail(email, password);
-  if (error) alert(error.message);
-  else startApp();
-});
-
-signupBtn.addEventListener('click', async () => {
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  const { error } = await signUpWithEmail(email, password);
-  if (error) alert(error.message);
-  else alert('Check your email for confirmation!');
-});
-
-googleLoginBtn.addEventListener('click', async () => {
-  await signInWithGoogle();
-});
-
-logoutBtn.addEventListener('click', async () => {
-  await signOut();
-  window.location.reload();
-});
-
-// Check Session on Load
-getSession().then(session => {
-  if (session) {
-    startApp();
-  }
+startBtn.addEventListener('click', () => {
+  startApp();
 });
 
 function startApp() {
   if (isAppStarted) return;
   landingScene.stop();
-  authOverlay.classList.add('hidden');
+  landingOverlay.classList.add('hidden');
   toolbox.classList.remove('hidden');
   isAppStarted = true;
   init();
