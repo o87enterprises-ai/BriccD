@@ -18,12 +18,54 @@ const startBtn = document.getElementById('start-btn');
 const toolbox = document.getElementById('toolbox');
 const profileUI = document.getElementById('profile-ui');
 const movementControls = document.getElementById('movement-controls');
+const unhideUIBtn = document.getElementById('unhide-ui');
 
 let isAppStarted = false;
 let landingScene = initLandingScene();
 
 startBtn.addEventListener('click', () => {
   startApp();
+});
+
+// UI Toggle Logic
+document.getElementById('hide-ui').addEventListener('click', () => {
+  toolbox.classList.add('hidden');
+  movementControls.classList.add('hidden');
+  unhideUIBtn.classList.remove('hidden');
+});
+
+unhideUIBtn.addEventListener('click', () => {
+  toolbox.classList.remove('hidden');
+  if (selectedPiece) movementControls.classList.remove('hidden');
+  unhideUIBtn.classList.add('hidden');
+});
+
+// Full Screen Logic
+const toggleFullScreen = () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+    });
+  } else {
+    document.exitFullscreen();
+  }
+};
+
+document.getElementById('toggle-fullscreen').addEventListener('click', toggleFullScreen);
+
+// Escape key to exit fullscreen and unhide UI
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    }
+    // Also unhide UI if hidden
+    if (toolbox.classList.contains('hidden')) {
+      toolbox.classList.remove('hidden');
+      if (selectedPiece) movementControls.classList.remove('hidden');
+      unhideUIBtn.classList.add('hidden');
+    }
+  }
 });
 
 function startApp() {

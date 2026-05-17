@@ -200,6 +200,58 @@ hr {
 button.secondary { background: var(--secondary); color: white; }
 button.danger { background: var(--danger); color: white; }
 
+#unhide-ui {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: var(--primary);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  #toolbox {
+    width: 140px;
+    padding: 10px;
+    top: 10px;
+    left: 10px;
+    font-size: 14px;
+  }
+
+  #toolbox button {
+    padding: 8px;
+    margin-bottom: 5px;
+  }
+
+  #piece-list {
+    grid-template-columns: 1fr;
+  }
+
+  #movement-controls {
+    right: 10px;
+    bottom: 10px;
+    padding: 8px;
+    gap: 5px;
+    transform: scale(0.9);
+    transform-origin: bottom right;
+  }
+
+  .landing-card {
+    width: 80%;
+    padding: 2rem;
+  }
+
+  .landing-card h1 {
+    font-size: 2rem;
+  }
+}
+
 #vr-controls {
   position: fixed;
   bottom: 20px;
