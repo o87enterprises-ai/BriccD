@@ -5,18 +5,21 @@ export function assembleAvatar(scene, options = {}) {
     head = '#ffff00',
     torso = '#ff0000',
     legs = '#0000ff',
-    faceType = 'classic'
+    faceType = 'classic',
+    gender = 'male'
   } = options;
 
   const group = new THREE.Group();
   group.name = 'Avatar';
+  // Add metadata for snapping logic
+  group.userData.height = 2.4; // Total height approx
 
   // Head
   const headGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.8, 16);
   const headMat = new THREE.MeshStandardMaterial({ color: head });
   
   // Create face texture
-  const faceTexture = createFaceTexture(faceType);
+  const faceTexture = createFaceTexture(faceType, gender);
   const faceMat = new THREE.MeshStandardMaterial({ 
     map: faceTexture,
     transparent: true,
@@ -60,7 +63,7 @@ export function assembleAvatar(scene, options = {}) {
   return group;
 }
 
-function createFaceTexture(type) {
+function createFaceTexture(type, gender) {
   const canvas = document.createElement('canvas');
   canvas.width = 128;
   canvas.height = 128;
@@ -69,6 +72,22 @@ function createFaceTexture(type) {
   ctx.strokeStyle = '#000';
   ctx.lineWidth = 8;
   ctx.lineCap = 'round';
+
+  // Add eyelashes for female
+  if (gender === 'female') {
+    ctx.lineWidth = 4;
+    // Left eye lashes
+    ctx.beginPath();
+    ctx.moveTo(30, 40); ctx.lineTo(20, 30);
+    ctx.moveTo(40, 35); ctx.lineTo(40, 25);
+    ctx.stroke();
+    // Right eye lashes
+    ctx.beginPath();
+    ctx.moveTo(98, 40); ctx.lineTo(108, 30);
+    ctx.moveTo(88, 35); ctx.lineTo(88, 25);
+    ctx.stroke();
+    ctx.lineWidth = 8;
+  }
 
   switch (type) {
     case 'cool':

@@ -49,24 +49,6 @@ function init() {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x87ceeb);
 
-  let currentAvatar = assembleAvatar(scene);
-  currentAvatar.position.set(-5, 0, -5);
-  scene.add(currentAvatar);
-
-  // Update Avatar Logic
-  document.getElementById('save-avatar').addEventListener('click', () => {
-    scene.remove(currentAvatar);
-    currentAvatar = assembleAvatar(scene, {
-      head: document.getElementById('head-color').value,
-      torso: document.getElementById('torso-color').value,
-      legs: document.getElementById('legs-color').value,
-      faceType: document.getElementById('face-type').value
-    });
-    currentAvatar.position.set(-5, 0, -5);
-    scene.add(currentAvatar);
-    profileUI.classList.add('hidden');
-  });
-
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(10, 10, 10);
 
@@ -103,6 +85,30 @@ function init() {
   const builderControls = setupControls(camera, renderer, scene, orbitControls);
   const eraser = setupEraser(camera, scene, builderControls.getDraggables, builderControls.removeDraggable);
   setupAlignView(camera, orbitControls);
+
+  let currentAvatar = assembleAvatar(scene);
+  currentAvatar.position.set(-5, 1.2, -5); // Set y to half of avatar height (2.4/2)
+  scene.add(currentAvatar);
+  builderControls.addDraggable(currentAvatar);
+
+  // Update Avatar Logic
+  document.getElementById('save-avatar').addEventListener('click', () => {
+    builderControls.removeDraggable(currentAvatar);
+    scene.remove(currentAvatar);
+    
+    currentAvatar = assembleAvatar(scene, {
+      head: document.getElementById('head-color').value,
+      torso: document.getElementById('torso-color').value,
+      legs: document.getElementById('legs-color').value,
+      faceType: document.getElementById('face-type').value,
+      gender: document.getElementById('gender-type').value
+    });
+    
+    currentAvatar.position.set(-5, 1.2, -5);
+    scene.add(currentAvatar);
+    builderControls.addDraggable(currentAvatar);
+    profileUI.classList.add('hidden');
+  });
 
   let selectedPiece = null;
 
