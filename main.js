@@ -1,6 +1,19 @@
 import './style.css';
 import * as THREE from 'three';
 
+// Auth Logic
+const authOverlay = document.getElementById('auth-overlay');
+const loginBtn = document.getElementById('login-btn');
+
+let isAppStarted = false;
+
+loginBtn.addEventListener('click', () => {
+  authOverlay.classList.add('hidden');
+  isAppStarted = true;
+  animate();
+});
+
+// Three.js Logic
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x87ceeb); // sky blue
 
@@ -33,8 +46,10 @@ const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
 dirLight.position.set(10, 20, 5);
 scene.add(dirLight);
 
-// Simple orbit controls (will add via import later, but for now rotate camera manually)
+// Simple orbit controls
 function animate() {
+  if (!isAppStarted) return;
+  
   requestAnimationFrame(animate);
   // For now, just spin the camera around the center
   const radius = 10;
@@ -51,4 +66,4 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-animate();
+// We wait for login to call animate()
