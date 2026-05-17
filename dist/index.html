@@ -4,24 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bricc'd - Lego Studio</title>
-    <script type="module" crossorigin src="/assets/index-CpJFPOYf.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BhjHmwct.css">
+    <script type="module" crossorigin src="/assets/index-Cgp2u3zo.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BGsGDYp9.css">
   <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
   <body>
-    <div id="auth-overlay">
-      <div class="auth-card">
+    <div id="landing-overlay">
+      <div class="landing-card">
         <h1>Bricc'd</h1>
-        <p>Login to start building</p>
-        <div class="auth-methods">
-          <input type="email" placeholder="Email" id="email" />
-          <input type="password" placeholder="Password" id="password" />
-          <div class="btn-group">
-            <button id="login-btn">Login</button>
-            <button id="signup-btn">Sign Up</button>
-          </div>
-          <hr/>
-          <button id="google-login-btn" class="secondary">Login with Google</button>
-        </div>
+        <p>The Ultimate 3D Brick Studio</p>
+        <button id="start-btn">Start Building</button>
       </div>
     </div>
 
@@ -47,7 +38,6 @@
           </div>
         </div>
         <button id="save-avatar">Save & Close</button>
-        <button id="logout-btn" class="danger">Logout</button>
       </div>
     </div>
 
@@ -67,6 +57,21 @@
       <button id="rotate-piece">Rotate</button>
       <button id="lift-piece">Lift</button>
       <button id="drop-piece">Drop</button>
+    </div>
+
+    <div id="movement-controls" class="hidden">
+      <div class="d-pad">
+        <button id="move-fwd" title="Forward">▲</button>
+        <div class="middle-row">
+          <button id="move-left" title="Left">◀</button>
+          <button id="move-back" title="Backward">▼</button>
+          <button id="move-right" title="Right">▶</button>
+        </div>
+      </div>
+      <div class="vertical-controls">
+        <button id="move-up" title="Up">⤒</button>
+        <button id="move-down" title="Down">⤓</button>
+      </div>
     </div>
 
     <div id="vr-controls"></div>

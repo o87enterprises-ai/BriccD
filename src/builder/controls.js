@@ -5,6 +5,7 @@ import { BRICK_H, BRICK_W, GRID_SIZE } from './pieces.js';
 export function setupControls(camera, renderer, scene, orbitControls) {
   const draggableObjects = [];
   const dragControls = new DragControls(draggableObjects, camera, renderer.domElement);
+  dragControls.transformGroup = true;
 
   dragControls.addEventListener('dragstart', () => {
     orbitControls.enabled = false;
